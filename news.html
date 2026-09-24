@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market News Feed</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      background: #0b0f14;
+      color: #f3f4f6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .page {
+      width: min(900px, 96%);
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .meta {
+      color: #9ca3af;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.22);
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+
+    button {
+      background: #1f2937;
+      border: 1px solid #374151;
+      color: #f9fafb;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    button:hover {
+      background: #273244;
+    }
+
+    .feed {
+      min-height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="header">
+      <div>
+        <h1>Market News Feed</h1>
+      </div>
+
+      <div class="meta">
+        Source: @LiveSquawk<br>
+        Auto-refresh: every 5 minutes
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="toolbar">
+        <span id="lastUpdated">Loading feed…</span>
+        <button onclick="location.reload()">Refresh now</button>
+      </div>
+
+      <div class="feed">
+        <a
+          class="twitter-timeline"
+          data-theme="dark"
+          data-chrome="noheader nofooter noborders transparent"
+          data-height="900"
+          href="https://twitter.com/LiveSquawk">
+          Posts by LiveSquawk
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <script>
+    const now = new Date();
+    document.getElementById("lastUpdated").textContent =
+      "Page loaded: " + now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+    // Reload every 5 minutes
+    setTimeout(() => {
+      location.reload();
+    }, 5 * 60 * 1000);
+  </script>
+</body>
+</html>
